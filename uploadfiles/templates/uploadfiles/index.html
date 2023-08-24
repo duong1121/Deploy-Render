@@ -1,0 +1,49 @@
+{% extends 'mysite/base.html' %}
+
+{% block content %}
+{% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <h1>Hello, {{ user.username }}</h1>
+
+    <div class="row">
+        {% for document in documents %}
+        <div class="col-3">
+        <a href="{% url 'download' id=document.id %}">
+        {% if document.extension == 'image' %}
+            <img src="{{ document.file.url }}">
+        {% elif document.extension == 'pdf' %}
+            <img src="{% static '/mysite/pdf.png' %}">
+        {% elif document.extension == 'word' %}
+            <img src="{% static '/mysite/word.jpg' %}">
+        {% elif document.extension == 'other' %}
+            <img src="{% static '/mysite/document.png' %}">
+        {% endif %}
+                <p>{{ document.name }}
+
+        </a></div>
+        {% endfor %}
+    </div>
+
+
+    <label class="btn btn-outline-primary"><input type="file" id="document" name="myfile">Upload File</label>
+
+   <script >
+      $("#document").change(function(){
+            let document = $("#document").prop('files')[0];
+            $("#document").prop('files', null);
+            let url = 'upload/';
+            var formData = new FormData();
+            formData.append('document', document);
+            let option = { method : 'POST', headers : {'X-CSRFToken':'{{ csrf_token }}'}, body : formData }
+            fetch(url, option)
+            .then((response) => response.json())
+            .then((responseData) => {
+             if (responseData['message'] == 'success'){
+                location.reload();
+             }
+            })
+            .catch(error => console.warn(error));
+      });
+   </script>
+{% endblock %}

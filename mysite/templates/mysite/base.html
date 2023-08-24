@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DocumentUpload</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <style>
+    .errorlist {
+      color: red;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .row{
+        margin: 10px;
+        padding: 5px;
+    }
+    body {
+    width: 90%;
+    background-color: #f2f2f2;
+    }
+
+    input[type=text], input[type=password], input[type=email], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    img {
+    width : 100px;
+    height: 100px;
+    }
+
+    input[type=file] {
+      display: none;
+    }
+
+    .container-fluid {
+          background-color: white;
+          margin: 0px 50px;
+          margin-right: 500px;
+
+    }
+    </style>
+</head>
+<body>
+    {% include 'mysite/navbar.html' %}<br><br><br>
+    <div id="box">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
