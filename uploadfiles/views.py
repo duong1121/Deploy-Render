@@ -12,14 +12,13 @@ from base64 import b64decode, b64encode
 import io
 from PIL import Image
 import numpy as np
-from .darknet.darknet import JsonFile
+#from .darknet.darknet import JsonFile
 import json
 # Create your views here.
 
 
 @csrf_exempt
 def index(request):
-
        return render(request, 'uploadfiles/index.html')
 
 
@@ -42,8 +41,8 @@ class UploadView(generic.View):
             image = Image.open(io.BytesIO(image_bytes))
             image_np = np.array(image)
             
-            result = yolo_detect(image_np)
-            return JsonResponse({'result': result})
+            #result = yolo_detect(image_np)
+            #return JsonResponse({'result': result})
         return JsonResponse({'message': 'not a image'})
 
 
@@ -63,5 +62,5 @@ class DownloadView(generic.View):
         return Http404
     
 
-def yolo_detect(original_image):
-    return JsonFile(original_image)
+#def yolo_detect(original_image):
+#    return JsonFile(original_image)
